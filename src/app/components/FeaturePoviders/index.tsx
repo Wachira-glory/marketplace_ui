@@ -162,7 +162,7 @@ export default function MultiActionAreaCard() {
   ];
 
   return (
-    <div className="p-4">
+    <div className="p-4  mt-[50px]">
       <div className="flex gap-[560px]">
         <div>
           <h3 className="font-bold text-[20px]">Featured Providers</h3>
@@ -176,11 +176,11 @@ export default function MultiActionAreaCard() {
       </div>
 
       {/* First set of cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-[88px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-[55px]">
         {cards.map((card, index) => (
           <div
             key={index}
-            className="w-[284.62px] h-[283.89px] bg-white border border-black rounded-2xl shadow-md flex flex-col justify-between"
+            className="w-[284.62px] h-[283.89px] bg-white border border-[#E2E5F1] rounded-lg shadow-md flex flex-col justify-between"
           >
             {/* Image */}
             <div className="w-full h-36 flex justify-center items-center">
@@ -212,11 +212,11 @@ export default function MultiActionAreaCard() {
 
       {/* Second set of cards */}
       <div className="relative">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-[15px]">
           {moreCards.map((card, index) => (
             <div
               key={index}
-              className="w-[274.62px] h-[291.87px] bg-white border border-black rounded-2xl shadow-md flex flex-col justify-between"
+              className="w-[274.62px] h-[291.87px] bg-white border border-[#E2E5F1] rounded-2xl shadow-md flex flex-col justify-between"
             >
               {/* Image */}
               <div className="w-full h-36 flex justify-center items-center">
@@ -237,7 +237,7 @@ export default function MultiActionAreaCard() {
               <div className="mb-[28px]">
                 <div className="w-[228.74px] border-t border-[#E2E5F1] mx-auto mb-[15px]"></div>
                 <div className="flex items-center justify-center text-[#6366F1] mb-[20px] text-sm font-semibold cursor-pointer">
-                  {card.services} <ArrowRight size={16} className="ml-1 text-gray-500"  />
+                  {card.services} <ArrowRight size={16} className="ml-1 text-[#6366F1]"  />
                 </div>
               </div>
             </div>
@@ -252,8 +252,8 @@ export default function MultiActionAreaCard() {
         </div>
 
         {/* Next Button with Rounded Background */}
-        <button className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md p-3 rounded-full">
-          <ChevronRight size={24} className="text-[#6366F1]" />
+        <button className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-md p-3 rounded-full mb-[10px]">
+          <ChevronRight size={24} className="text-black" />
         </button>
       </div>
     </div>

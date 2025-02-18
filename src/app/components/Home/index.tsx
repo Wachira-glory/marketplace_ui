@@ -328,12 +328,13 @@
 // };
 
 // export default BlackDiv;
+
+
 "use client";
 
 import { useState } from "react";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
-import { ArrowRight, ArrowLeft } from "lucide-react";
 
 // Slide Data
 const slides = [
@@ -352,7 +353,7 @@ const slides = [
   },
   {
     id: 2,
-    image: "/images/second_image.jpeg",
+    image: "/images/secondlandingpageimage.png",
     title: (
       <>
         Empower <span className="text-[#3CA55C]">your business</span> with seamless payments
@@ -361,6 +362,8 @@ const slides = [
     description: "Fast and secure transactions for your business growth",
     buttonGradient: "linear-gradient(to right, #3CA55C, #B5AC49)",
     bgColor: "#FFFFFF",
+    gradient: "linear-gradient(to right, #00467F, #A5CC82)", // Add this line for the gradient
+
   },
 ];
 
@@ -392,7 +395,7 @@ const BlackDiv = () => {
       </div>
 
       {/* Main Section */}
-      <div className="mt-8 bg-white p-8 rounded-lg h-[564px] mx-auto relative">
+      <div className=" bg-[#F3F6FF] p-8 rounded-lg h-[564px] mx-auto relative">
         {/* Header */}
         <div className="flex items-center space-x-4">
           <span className="text-[#6366F1] text-[24px]">Forge</span>
@@ -402,58 +405,87 @@ const BlackDiv = () => {
 
         {/* Carousel */}
         <div
-          className="relative w-[1200px] h-[448px] mx-auto rounded-lg overflow-hidden"
-          style={{ background: slides[currentIndex].bgColor }}
-        >
-          {/* Background Image */}
-          <img
-            src={slides[currentIndex].image}
-            alt="Carousel"
-            className="w-full h-full object-cover rounded-lg absolute inset-0 opacity-10"
-          />
+  className="relative w-[1200px] h-[448px] mx-auto rounded-lg overflow-hidden"
+  style={{ background: slides[currentIndex].bgColor }}
+>
+  {/* Background Image */}
+  <img
+    src={slides[currentIndex].image}
+    alt="Carousel"
+    className="w-[1200px] h-[448px] object-cover rounded-lg t-[54px]"
+  />
+  {/* Blue Overlay with linear gradient and 40% opacity */}
+  <div
+    className="absolute inset-0"
+    style={{
+      background: "linear-gradient(to right, #2B5876, #4E4376)",
+      opacity:0.9,
+    }}
+  ></div>
 
-          {/* Overlay Content */}
-          <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-8">
-            <h1 className="text-4xl md:text-5xl font-bold">{slides[currentIndex].title}</h1>
-            <p className="text-lg md:text-xl mt-6">{slides[currentIndex].description}</p>
+  {/* Overlay Content */}
+  <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-8">
+    <h1 className="text-4xl md:text-5xl font-bold">{slides[currentIndex].title}</h1>
+    <p className="text-lg md:text-xl mt-6">{slides[currentIndex].description}</p>
 
-            {/* Browse Collection Button */}
-            <button
-              className="flex items-center text-white px-6 py-2 rounded-lg mt-8"
-              style={{ background: slides[currentIndex].buttonGradient }}
-            >
-              <CiSearch className="text-xl" />
-              <span className="ml-2">Browse Collection</span>
-            </button>
-          </div>
+    {/* Browse Collection Button */}
+    <button
+      className="flex items-center text-white px-6 py-2 rounded-lg mt-8"
+      style={{ background: slides[currentIndex].buttonGradient }}
+    >
+      <CiSearch className="text-xl" />
+      <span className="ml-2">Browse Collection</span>
+    </button>
+  </div>
+</div>
 
-          {/* Navigation Arrows */}
+
+<div className="absolute inset-0 flex justify-between items-center px-4">
+{currentIndex === 0 ? (
           <button
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-30 p-2 rounded-full"
-            onClick={prevSlide}
-          >
-            <ArrowLeft size={24} className="text-white" />
-          </button>
-          <button
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-30 p-2 rounded-full"
+            className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-30 p-2 rounded-full"
             onClick={nextSlide}
           >
-            <ArrowRight size={24} className="text-white" />
+            <span className="text-black text-2xl">&gt;</span> {/* Greater than symbol */}
           </button>
+        ) : (
+          <>
+            <button
+              className="absolute left-1 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-30 p-2 rounded-full"
+              onClick={prevSlide}
+            >
+              <span className="text-black text-2xl">&lt;</span> {/* Less than symbol */}
+            </button>
+            <button
+              className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-30 p-2 rounded-full"
+              onClick={nextSlide}
+            >
+              <span className="text-black text-2xl">&gt;</span> {/* Greater than symbol */}
+            </button>
+          </>
+        )}
+</div>
 
-          {/* Dots Indicator */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            {slides.map((_, index) => (
-              <div
-                key={index}
-                className={`w-[9px] h-[9px] rounded-full ${index === currentIndex ? "bg-[#6366F1] w-[43px]" : "bg-gray-300"}`}
-              ></div>
-            ))}
-          </div>
-        </div>
+
+
+
+
+{/* Dots Indicator */}
+<div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+  {slides.map((_, index) => (
+    <div
+      key={index}
+      className={`w-[9px] h-[9px] rounded-full ${index === 0 ? "w-[43px]" : "w-[9px]"} ${index === currentIndex ? "bg-[#6366F1]" : "bg-gray-300"}`}
+    ></div>
+  ))}
+</div>
+
+
       </div>
     </div>
   );
 };
 
 export default BlackDiv;
+
+

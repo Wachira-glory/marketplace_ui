@@ -1,132 +1,262 @@
+// "use client"; // ✅ Fix React hook error
 
-"use client";
+// import { useEffect, useState } from "react";
+// import { fetchCards } from "@/app/utils/fetchSafaricomCards";
 
-import { useState } from "react";
-import { MdOutlineAccountCircle } from "react-icons/md";
-import { CiSearch } from "react-icons/ci";
-import { ArrowRight, ArrowLeft } from "lucide-react";
-import Image from 'next/image';
+// const SafaricomLists = () => {
+//   const [cards, setCards] = useState<any[]>([]);
+//   const [loading, setLoading] = useState(true);
+//   const [currentIndex, setCurrentIndex] = useState(0);
+
+//   useEffect(() => {
+//     const getCards = async () => {
+//       setLoading(true);
+//       const fetchedCards = await fetchCards();
+//       setCards(fetchedCards);
+//       setLoading(false);
+//     };
+
+//     getCards();
+//   }, []);
+
+//   const nextSlide = () => {
+//     if (currentIndex < cards.length - 4) {
+//       setCurrentIndex(currentIndex + 4);
+//     } else {
+//       setCurrentIndex(0); // Loop back to the first set of 4 cards
+//     }
+//   };
+
+//   const prevSlide = () => {
+//     if (currentIndex > 0) {
+//       setCurrentIndex(currentIndex - 4);
+//     } else {
+//       setCurrentIndex(cards.length - 4); // Loop back to the last set of 4 cards
+//     }
+//   };
+
+//   return (
+//     <div className="relative w-[1440px] h-[611px] bg-[#F3F6FF] p-6">
+//       <h2 className="text-2xl font-semibold mb-6">Safaricom Marketplace</h2>
+
+//       {loading ? (
+//         <p>Loading...</p>
+//       ) : cards.length === 0 ? (
+//         <p>No cards available.</p>
+//       ) : (
+//         <div className="overflow-hidden">
+//           {/* Carousel container */}
+//           <div
+//             className="flex transition-transform duration-500"
+//             style={{
+//               transform: `translateX(-${currentIndex * 306}px)`,
+//             }}
+//           >
+//             {/* Render 4 cards at a time */}
+//             {cards.map((card, index) => (
+//               <div
+//                 key={card.id}
+//                 className="w-[306px] h-[228px] bg-white rounded-lg p-4 m-4 shadow-lg"
+//               >
+//                 {/* Card Content */}
+//                 <div className="flex justify-between">
+//                   <img
+//                     src={card.logo_url} // Assuming logo_url field from Supabase
+//                     alt="Logo"
+//                     className="w-10 h-10 object-cover"
+//                   />
+//                   <button className="text-gray-400 hover:text-gray-600">❤️</button>
+//                 </div>
+//                 <h3 className="mt-2 text-xl font-bold">{card.title}</h3>
+//                 <p className="mt-2 text-gray-700">{card.description}</p>
+//                 <button
+//                   className="mt-4 w-full py-2 px-4 rounded-md text-white"
+//                   style={{
+//                     backgroundColor: "#6366F1",
+//                     opacity: "0.8",
+//                   }}
+//                 >
+//                   <span style={{ color: "#6366F1", opacity: "0.8" }}>
+//                     Mobile money
+//                   </span>
+//                 </button>
+//               </div>
+//             ))}
+//           </div>
+
+//           {/* Navigation buttons */}
+//           <button
+//             onClick={prevSlide}
+//             className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-500 text-white p-2 rounded-full"
+//           >
+//             {"<"}
+//           </button>
+//           <button
+//             onClick={nextSlide}
+//             className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-500 text-white p-2 rounded-full"
+//           >
+//             {">"}
+//           </button>
+
+//           {/* Dots for carousel navigation */}
+//           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+//             {Array.from({ length: Math.ceil(cards.length / 4) }).map((_, index) => (
+//               <div
+//                 key={index}
+//                 className={`w-3 h-3 rounded-full ${
+//                   index === Math.floor(currentIndex / 4)
+//                     ? "bg-[#6366F1]"
+//                     : "bg-gray-300"
+//                 }`}
+//               ></div>
+//             ))}
+//           </div>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default SafaricomLists;
 
 
-// Slide Data
-const slides = [
-  {
-    id: 1,
-    image: "/images/landingpage_bckground.jpeg",
-    title: (
-      <>
-        Discover <span className="text-[#F6FA83]">digital</span> services needed to build your business in {" "}
-        <span className="text-[#FFBA08]">Africa</span>
-      </>
-    ),
-    description: "A wide range of services and integrations available",
-    buttonGradient: "linear-gradient(to right, #6366F1, #8B5CF6, #D946EF)",
-    bgColor: "#F3F6FF",
-  },
-  {
-    id: 2,
-    image: "/images/second_image.jpeg",
-    title: (
-      <>
-        Empower <span className="text-[#3CA55C]">your business</span> with seamless payments
-      </>
-    ),
-    description: "Fast and secure transactions for your business growth",
-    buttonGradient: "linear-gradient(to right, #3CA55C, #B5AC49)",
-    bgColor: "#FFFFFF",
-  },
-];
 
-const BlackDiv = () => {
+
+"use client"; // ✅ Fix React hook error
+
+import { useEffect, useState } from "react";
+import { fetchCards } from "@/app/utils/fetchSafaricomCards";
+
+const SafaricomLists = () => {
+  const [cards, setCards] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const nextSlide = () => setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-  const prevSlide = () => setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length);
+  useEffect(() => {
+    const getCards = async () => {
+      setLoading(true);
+      const fetchedCards = await fetchCards();
+      setCards(fetchedCards);
+      setLoading(false);
+    };
+
+    getCards();
+  }, []);
+
+  const nextSlide = () => {
+    if (currentIndex < cards.length - 4) {
+      setCurrentIndex(currentIndex + 4);
+    } else {
+      setCurrentIndex(0); // Loop back to the first set of 4 cards
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 4);
+    } else {
+      setCurrentIndex(cards.length - 4); // Loop back to the last set of 4 cards
+    }
+  };
 
   return (
-    <div>
-      {/* Top Black Bar */}
-      <div className="w-full h-16 bg-black flex items-center justify-between px-16">
-        {/* Logo */}
-        <Image src="/images/quikklogo.svg" alt="Logo" className="w-12 h-12" />
+<div className="relative w-[1280px] h-[611px] bg-[#F3F6FF] p-6 mt-[70px]">
+<button
+  className="w-[111px] h-[26px] rounded-2xl text-white text-sm font-medium flex items-center justify-center ml-[570px] mt-[30px]"
+  style={{
+    background: "linear-gradient(90deg, #8B5CF6, #6366F1, #D946EF)",
+  }}
+>
+  Marketplace
+</button>
 
-        {/* Buttons */}
-        <div className="flex space-x-4">
-          <button className="flex items-center bg-white text-black px-4 py-2 rounded-lg border border-black w-[193px] h-[36px]">
-            <MdOutlineAccountCircle className="text-xl" />
-            <span className="text-[14px] ml-2">Developer Portal</span>
-          </button>
+  <h2 className="text-2xl font-semibold mt-[40px] ml-[255px]">Discover a range of digital services you can integrate with</h2>
 
-          <button className="flex items-center bg-[#6366f1] text-white px-4 py-2 rounded-lg w-[136px] h-[36px]">
-            <span className="text-xl">📞</span>
-            <span className="text-[14px] ml-2">Book a Call</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Main Section */}
-      <div className="mt-8 bg-white p-8 rounded-lg h-[564px] mx-auto relative">
-        {/* Header */}
-        <div className="flex items-center space-x-4">
-          <span className="text-[#6366F1] text-[24px]">Forge</span>
-          <span className="text-[24px]">Marketplace</span>
-          <Image src="/images/Quikk.png" className="w-[36px] h-[19px]" alt="Quikk Logo" />
-        </div>
-
-        {/* Carousel */}
-        <div
-          className="relative w-[1200px] h-[448px] mx-auto rounded-lg overflow-hidden"
-          style={{ background: slides[currentIndex].bgColor }}
+  {loading ? (
+    <p>Loading...</p>
+  ) : cards.length === 0 ? (
+    <p>No cards available.</p>
+  ) : (
+    <div className="flex justify-center">
+      {/* Invisible wrapper div with fixed width and height */}
+      <div className="w-[1200px] h-[347px] overflow-hidden mt-[30px] flex justify-center relative">
+        
+        {/* Previous Button */}
+        <button
+          onClick={prevSlide}
+          className="absolute top-2 left-2 ml-[1100px] bg-[#B2B5B780] text-black p-2 rounded-full shadow-lg"
+          style={{ width: '35.82732391357422px', height: '35.82732391357422px' }}
         >
-          {/* Background Image */}
-          <Image
-            src={slides[currentIndex].image}
-            alt="Carousel"
-            className="w-full h-full object-cover rounded-lg absolute inset-0 opacity-30"
-          />
+          {"<"}
+        </button>
+        
+        <button
+  onClick={nextSlide}
+  className="absolute top-2 right-2 bg-white text-black p-2 rounded-full shadow-lg"
+  style={{ width: '35.82732391357422px', height: '35.82732391357422px' }}
+>
+  {">"}
+</button>
+          
+        
+  {/* Carousel container */}
+<div
+  className="flex transition-transform duration-500 mt-[80px]"
+  style={{
+    transform: `translateX(-${currentIndex * 306}px)`, 
+    paddingRight: '158px',
+  }}
+>
+  {/* Render 4 cards at a time */}
+  {cards.map((card, index) => (
+    <div
+      key={card.id}
+      className="w-[306px] h-[228px] bg-white rounded-lg p-4 m-4 shadow-lg"
+    >
+      {/* Card Content */}
+      <div className="flex justify-between">
+        <img
+          src={card.logo_url} // Assuming logo_url field from Supabase
+          alt="Logo"
+          className="w-10 h-10 object-cover"
+        />
+        <button className="text-gray-400 hover:text-gray-600">❤️</button>
+      </div>
+      <h3 className="mt-2 text-xl font-bold">{card.title}</h3>
+      <p className="mt-2 text-gray-700">{card.description}</p>
 
-          {/* Overlay Content */}
-          <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-8">
-            <h1 className="text-4xl md:text-5xl font-bold">{slides[currentIndex].title}</h1>
-            <p className="text-lg md:text-xl mt-6">{slides[currentIndex].description}</p>
+      <button
+        className="mt-[8px] w-[81px] h-[20px] py-1 px-2 rounded-md text-white bg-[#6366F1] bg-opacity-20 flex items-center justify-center"
+      >
+        <span style={{ color: "#6366F1", fontSize: "9px", whiteSpace: "nowrap" }}>
+          Mobile money
+        </span>
+      </button>
+    </div>
+  ))}
+</div> 
 
-            {/* Browse Collection Button */}
-            <button
-              className="flex items-center text-white px-6 py-2 rounded-lg mt-8"
-              style={{ background: slides[currentIndex].buttonGradient }}
-            >
-              <CiSearch className="text-xl" />
-              <span className="ml-2">Browse Collection</span>
-            </button>
-          </div>
+{/* Pagination Dots - Add this below the carousel */}
+<div className="flex justify-center mt-4">
+  {[0, 1, 2].map((index) => (
+    <div
+      key={index}
+      className={`w-3 h-3 mx-1 rounded-full ${
+        index === Math.floor(currentIndex / 4) ? "bg-[#6366F1]" : "bg-gray-400"
+      }`}
+    ></div>
+  ))}
+</div>
 
-          {/* Navigation Arrows */}
-          <button
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 p-2 rounded-full"
-            onClick={prevSlide}
-          >
-            <ArrowLeft size={24} className="text-white" />
-          </button>
-          <button
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 p-2 rounded-full"
-            onClick={nextSlide}
-          >
-            <ArrowRight size={24} className="text-white" />
-          </button>
 
-          {/* Dots Indicator */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            {slides.map((_, index) => (
-              <div
-                key={index}
-                className={`w-[9px] h-[9px] rounded-full ${index === currentIndex ? "bg-[#6366F1] w-[43px]" : "bg-gray-300"}`}
-              ></div>
-            ))}
-          </div>
-        </div>
+        {/* Next Button */}
+     
       </div>
     </div>
+  )}
+</div>
+
   );
 };
 
-export default BlackDiv;
+export default SafaricomLists;
