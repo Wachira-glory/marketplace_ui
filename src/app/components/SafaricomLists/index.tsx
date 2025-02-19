@@ -123,12 +123,23 @@
 
 
 "use client"; // ✅ Fix React hook error
+import Image from 'next/image';
 
 import { useEffect, useState } from "react";
 import { fetchCards } from "@/app/utils/fetchSafaricomCards";
 
+
+type Card = {
+  id: number;
+  logo_url: string;
+  title: string;
+  description: string;
+};
+
+
+
 const SafaricomLists = () => {
-  const [cards, setCards] = useState<any[]>([]);
+  const [cards, setCards] = useState<Card[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -208,14 +219,14 @@ const SafaricomLists = () => {
   }}
 >
   {/* Render 4 cards at a time */}
-  {cards.map((card, index) => (
+  {cards.map((card) => (
     <div
       key={card.id}
       className="w-[306px] h-[228px] bg-white rounded-lg p-4 m-4 shadow-lg"
     >
       {/* Card Content */}
       <div className="flex justify-between">
-        <img
+        <Image
           src={card.logo_url} // Assuming logo_url field from Supabase
           alt="Logo"
           className="w-10 h-10 object-cover"
@@ -260,3 +271,4 @@ const SafaricomLists = () => {
 };
 
 export default SafaricomLists;
+

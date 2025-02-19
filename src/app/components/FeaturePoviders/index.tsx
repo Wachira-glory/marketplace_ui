@@ -4,7 +4,7 @@
 //         <h3>Featured Providers</h3>
 //         <p>Loading technology companies and startups offering digital services</p>
 //         <div className="cursor-pointer">
-//           <img
+//           <image
 //             className="w-full h-36 object-cover"
 //             src="/static/images/cards/contemplative-reptile.jpg"
 //             alt="green iguana"
@@ -67,7 +67,7 @@
 //           >
 //             {/* Image */}
 //             <div className="w-full h-36 flex justify-center items-center">
-//               <img
+//               <image
 //                 className="w-[170.24px] h-[48.55px] object-cover rounded-t-2xl"
 //                 src={card.image}
 //                 alt={card.title}
@@ -100,9 +100,11 @@
 //     );
 //   }
 
-
+"use client"
 
 import { ArrowRight, ChevronRight } from "lucide-react"; // Import Next Icon
+import Image from 'next/image';
+
 
 export default function MultiActionAreaCard() {
   // Card data
@@ -111,25 +113,25 @@ export default function MultiActionAreaCard() {
       title: "Pezesha",
       description:
         "Pezesha enables SMEs & institutions with access to affordable credit & other financial services through our embedded finance infrastructure.",
-      image: "images/pezesha_logo.png",
+      image: "/images/pezesha_logo.png",
     },
     {
       title: "IPSL",
       description:
         "IPSL is a leading provider of financial services APIs, catering to the banking industry. PesaLink enables realtime transfer of funds from one bank account to another.",
-      image: "images/pesalink.png",
+      image: "/images/pesalink.png",
     },
     {
       title: "NSE",
       description:
         "NSE is a leading African securities exchange, providing a platform for trading of securities and derivatives operating the Capital Markets Authority of Kenya.",
-      image: "images/nse_logo.png",
+      image: "/images/nse_logo.png",
     },
     {
       title: "Pezesha",
       description:
         "Pezesha enables SMEs & institutions with access to affordable credit & other financial services through our embedded finance infrastructure.",
-      image: "images/lipachat_logo.png",
+      image: "/images/lipachat_logo.png",
     },
   ];
 
@@ -138,28 +140,29 @@ export default function MultiActionAreaCard() {
     {
       title: "Finance and banking",
       description: "Pezesha enables SMEs & institutions with access to affordable credit & other financial services through our embedded finance infrastructure.",
-      image: "images/card1.png",
+      image: "/images/card1.png",
       services: "50 services available",
     },
     {
       title: "Mobile Money ",
       description: "Pezesha enables SMEs & institutions with access to affordable credit & other financial services through our embedded finance infrastructure..",
-      image: "images/card2.png",
+      image: "/images/card2.png",
       services: "100 services available",
     },
     {
       title: "Communications",
       description: "Pezesha enables SMEs & institutions with access to affordable credit & other financial services through our embedded finance infrastructure..",
-      image: "images/card3.png",
+      image: "/images/card3.png",
       services: "10 services available",
     },
     {
       title: "Fintechs",
       description: "Pezesha enables SMEs & institutions with access to affordable credit & other financial services through our embedded finance infrastructure..",
-      image: "images/card4.png",
+      image: "/images/card4.png",
       services: "10 services available",
     },
   ];
+
 
   return (
     <div className="p-4  mt-[50px]">
@@ -180,13 +183,16 @@ export default function MultiActionAreaCard() {
         {cards.map((card, index) => (
           <div
             key={index}
-            className="w-[284.62px] h-[283.89px] bg-white border border-[#E2E5F1] rounded-lg shadow-md flex flex-col justify-between"
+            className="w-[284.62px] h-[283.89px} bg-white border border-[#E2E5F1] rounded-lg shadow-md flex flex-col justify-between"
           >
             {/* Image */}
             <div className="w-full h-36 flex justify-center items-center">
-              <img
-                className="w-[164.76px] h-[52.55px] object-cover rounded-t-2xl"
-                src={card.image}
+              <Image
+                loading="lazy"
+                className="object-cover rounded-t-2xl"
+                src={card.image} 
+                width={204.62} 
+                height={283.89}
                 alt={card.title}
               />
             </div>
@@ -220,10 +226,12 @@ export default function MultiActionAreaCard() {
             >
               {/* Image */}
               <div className="w-full h-36 flex justify-center items-center">
-                <img
-                  className="w-[158.8px] h-[80.76px] mt-[14px] object-cover rounded-2xl"
-                  src="images/manylogos.png"
+                <Image
+                  className=" mt-[14px] object-cover rounded-2xl"
+                  src="/images/manylogos.png" 
                   alt={card.title}
+                 width={204.62} 
+                height={283.89}
                 />
               </div>
 
